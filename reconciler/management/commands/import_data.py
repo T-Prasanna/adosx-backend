@@ -2,7 +2,6 @@ import csv
 import os
 import re
 from django.conf import settings
-
 from django.core.management.base import BaseCommand
 from reconciler.models import Location, SystemARecord, SystemBEntry
 
@@ -17,13 +16,12 @@ def normalize_ref(raw: str) -> str:
 class Command(BaseCommand):
     help = "Import locations.csv, system_a.csv, system_b.csv into the database."
 
-        def add_arguments(self, parser):
+    def add_arguments(self, parser):
         parser.add_argument(
             "--data-dir",
             default=os.path.join(settings.BASE_DIR, "data"),
             help="Path to directory containing the three CSV files.",
         )
-
 
     def handle(self, *args, **options):
         data_dir = os.path.abspath(options["data_dir"])
